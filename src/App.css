@@ -1,0 +1,95 @@
+*,::before,::after{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    width: 100vw;
+}
+.app{
+    display: flex;
+    margin: 10px 200px;
+
+
+}
+.panier{
+    margin: 15px;
+    padding: 15px;
+}
+.dessert{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin: 10px;
+    padding: 10px;
+}
+.container{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.container .card{
+    width: 150px;
+    position: relative;
+   
+}
+.container .card .button.active{
+   background: #fff; 
+   position: absolute;
+    left: 20px;
+    border: 2px solid #df7614;
+    cursor: pointer;
+   bottom: 100px;
+   color: #000;
+   text-align: center;
+   width: 100px;
+   padding: 5px;
+   border-radius: 10px;
+   margin-top: 10px;
+   display: block;
+}
+.container .card .button.plus{
+    display: flex;
+    justify-content: space-between;
+    background: #349aac;
+    display: none;
+}
+.container .card .button.plus.active{
+    display: flex;
+    color: #fff;
+    justify-content: space-between;
+    background: #df7614;
+    
+}
+.container .card .button button{
+    background: none;
+    border: 1px solid #fff;
+    border-radius: 40%;
+    padding: 2px 3px;
+    color: #fff;
+    font-size: 16px;
+}
+.container .card .button{
+    display: none;
+}
+.container .card img{
+    width: 100%;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+.card .desc p{
+    text-align: center;
+    margin-top: 10px;
+   
+}
+.confirm{
+    width: 100%;
+    padding: 10px 20px;
+    margin-top: 10px;
+    margin: 10px auto;
+    background: #1f56a8;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+}
