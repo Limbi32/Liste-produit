@@ -46,7 +46,7 @@ function App() {
             
           setPaniers([...paniers,modifpanier])
           removeItem(paniers.length)
-          console.log(paniers.length);
+          console.log(paniers.length+1);
           // console.log(paniers[rang].quantite);
           // setPaniers(...paniers,modifpanier)
           // console.log('panier '+paniers[rang].quantite) 
@@ -73,7 +73,7 @@ function App() {
           { id:paniers[rang].id, name:paniers[rang].name, prix:paniers[rang].prix, type:paniers[rang].type, quantite:paniers[rang].quantite-1});
           
         setPaniers([...paniers,modifpanier])
-        removeItem(paniers.length)
+        removeItem(paniers.length+1)
      }
      const handleindex=(index)=>{
       // console.log('index '+index);
