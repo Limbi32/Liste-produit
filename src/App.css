@@ -7,14 +7,18 @@ body{
     width: 100vw;
 }
 .app{
-    display: flex;
-    margin: 10px 200px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    margin: 20px;
 
 
 }
 .panier{
     margin: 15px;
     padding: 15px;
+}
+.panier h3{
+    color: #eb7609;
 }
 .dessert{
     flex: 1;
@@ -36,18 +40,20 @@ body{
 }
 .container .card .button.active{
    background: #fff; 
-   position: absolute;
-    left: 20px;
+ 
+  transform: translate(10%,-100%);
     border: 2px solid #df7614;
     cursor: pointer;
-   bottom: 100px;
-   color: #000;
+    margin: auto 0;
+  
    text-align: center;
-   width: 100px;
+   width: 120px;
    padding: 5px;
-   border-radius: 10px;
+   border-radius: 20px;
    margin-top: 10px;
    display: block;
+   display: flex;
+   align-items: center;
 }
 .container .card .button.plus{
     display: flex;
@@ -69,26 +75,64 @@ body{
     padding: 2px 3px;
     color: #fff;
     font-size: 16px;
+   
+}
+.container .card .button img{
+ width: 20px;
+ height: 15px;
+
 }
 .container .card .button{
     display: none;
 }
 .container .card img{
     width: 100%;
-    margin-bottom: 30px;
+   
     border-radius: 10px;
+}
+.card .desc{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 .card .desc p{
     text-align: center;
-    margin-top: 10px;
+    
    
+}
+.card .desc .type1{
+    color: rgb(104, 93, 93);
+}
+.card .desc .produit1{
+    color:#d87213;
+    font-weight: bold;
+}
+.cont-panier{
+   margin: 20px 0;
+  
+}
+.cont-panier button{
+    width: 20px;
+    height: 20px;
+    margin: auto 0;
+    
+    
+}
+.box-contpanier{
+    display: flex;
+    justify-content: space-between;
+}
+.contenue{
+    display: flex;
+    gap: 10px;
 }
 .confirm{
     width: 100%;
     padding: 10px 20px;
     margin-top: 10px;
     margin: 10px auto;
-    background: #1f56a8;
+    background: #a0540d;
     color: #fff;
     border: none;
     border-radius: 10px;
