@@ -62,18 +62,16 @@ function App() {
     },[active])
     //modifer le nombre de produit a ajouter au panier
       const handlerplus=(index)=>{
-        console.log(index);
+       
         const rang=paniers.findIndex(panier=>panier.id===index)
-      
+     
           const modifpanier=paniers.splice(rang, 1,
             {id:paniers[rang].id,name:paniers[rang].name,prix:paniers[rang].prix, type:paniers[rang].type, quantite:paniers[rang].quantite+1})
-            console.log('longeur'+paniers.length+' rang '+rang );
-          setPaniers([...paniers,modifpanier])
-         
-        
            
-         
-          
+          setPaniers([...paniers,modifpanier])
+          // removeItem(paniers.length)
+        
+        
       
       }
     
@@ -85,6 +83,7 @@ function App() {
             const modifpanier=paniers.splice(rang, 1,
               { id:paniers[rang].id, name:paniers[rang].name, prix:paniers[rang].prix, type:paniers[rang].type, quantite:paniers[rang].quantite-1});
             setPaniers([...paniers,modifpanier])
+            removeItem(paniers.length)
             
           }
           
@@ -138,7 +137,7 @@ function App() {
   return (
     <>
    
-      <div className="app">
+      <div translate="no" className="app">
           <div className="dessert">
             <h1>Desserts</h1>
             <div  ref={ref1} className="container">
@@ -212,7 +211,7 @@ function App() {
         <div><p >Order total: </p><p className='numbertotal'>${totalquantite*totalpaniers}</p></div>
         <div>This is a carbon-neutral delivery</div>
         </div>
-          <button className='confirm'>Confirmer</button>
+          <button className='confirm'>Confirm order</button>
           </div>
       </div>
     </>
