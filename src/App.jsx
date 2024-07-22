@@ -15,7 +15,7 @@ import { useEffect, useRef, useState } from 'react'
 
 
 function App() {
-  const [quant,setQuant]=useState(0)
+  
       const PRODUITS=[
         {id:1,name:'Waffle with Berries',prix:6.50,type:'Waffle',detail:'',image:Img1},
         {id:2,name:'Vanilla Bean Crème Brulee',prix:7,type:'Crème Brulee',detail:'',image:Img2},
@@ -30,72 +30,110 @@ function App() {
       const [paniers, setPaniers]=useState([])
 
       const ref1=useRef(null)
-   const [nbprod,setNbprod]=useState(1)
+      const ref2=useRef(null)
+      const ref3=useRef(null)
+      const [active, setActive]=useState(0)
+      
+    useEffect(()=>{
       
     
-    
+        if (paniers.length>0) {
+          ref2.current.classList.add('active')
+          ref3.current.classList.remove('active')
+          console.log(ref3.current);
+          
+        }else{
+          ref2.current.classList.remove('active')
+          ref3.current.classList.add('active')
+          console.log(ref3.current);
+        }
+    },[])
+    useEffect(()=>{
+      
+        if (paniers.length>0) {
+          ref2.current.classList.add('active')
+          ref3.current.classList.remove('active')
+          console.log(ref3.current);
+        }else{
+          ref2.current.classList.remove('active')
+          ref3.current.classList.add('active')
+          console.log(ref3.current);
+        }
+    },[active])
+    //modifer le nombre de produit a ajouter au panier
       const handlerplus=(index)=>{
         console.log(index);
         const rang=paniers.findIndex(panier=>panier.id===index)
-        // setPaniers(paniers.filter(panier => panier.id !== index));
-      console.log('panier '+paniers[rang].quantite) 
-     
       
           const modifpanier=paniers.splice(rang, 1,
             {id:paniers[rang].id,name:paniers[rang].name,prix:paniers[rang].prix, type:paniers[rang].type, quantite:paniers[rang].quantite+1})
-            
+            console.log('longeur'+paniers.length+' rang '+rang );
           setPaniers([...paniers,modifpanier])
-          removeItem(paniers.length)
-          console.log(paniers.length+1);
-          // console.log(paniers[rang].quantite);
-          // setPaniers(...paniers,modifpanier)
-          // console.log('panier '+paniers[rang].quantite) 
-// Inserts at index 1
+         
         
-        
+           
+         
+          
       
       }
     
+      const handlermoins=(index)=>{
+        const rang=paniers.findIndex(panier=>panier.id===index)
        
         
+          if (paniers[rang].quantite>=2) {
+            const modifpanier=paniers.splice(rang, 1,
+              { id:paniers[rang].id, name:paniers[rang].name, prix:paniers[rang].prix, type:paniers[rang].type, quantite:paniers[rang].quantite-1});
+            setPaniers([...paniers,modifpanier])
+            
+          }
+          
+       
+     }
+       
+        //supprimmer un panier
 
       const removeItem = (id) => {
         setPaniers(paniers.filter(panier => panier.id !== id)); // Suppression d'un objet par id
         const container=ref1.current.children[id]
-        console.log(id-1);
+      
         container.children[2].classList.remove('active')
          container.children[1].classList.add('active')
-      };
-      const handlermoins=(index)=>{
-        const rang=paniers.findIndex(panier=>panier.id===index)
+           setActive(paniers.length)
        
-        const modifpanier=paniers.splice(rang, 1,
-          { id:paniers[rang].id, name:paniers[rang].name, prix:paniers[rang].prix, type:paniers[rang].type, quantite:paniers[rang].quantite-1});
-          
-        setPaniers([...paniers,modifpanier])
-        removeItem(paniers.length+1)
-     }
+      };
+      
+      //afficher le nombre de produit a jouter au panier
+
      const handleindex=(index)=>{
-      // console.log('index '+index);
+     
       const rang=paniers.findIndex(panier=>panier.id===index)
      return paniers[rang].quantite;
      }
+     
+     //ajouter des produit au panier
+
       const handlecart=(produit,index)=>{
    
      const container=ref1.current.children[index]
      container.children[1].classList.remove('active')
       container.children[2].classList.add('active')
-     
+     console.log(ref2.current.classList);
+       setActive(paniers.length)
+    if (paniers.length>=0) {
+      ref2.current.classList.add('active')
+    }else{
+      ref2.current.classList.remove('active')
+    }
       const newpanier = { id: index, name:produit.name, prix:produit.prix,type:produit.type, quantite:1};
         setPaniers([...paniers, newpanier]);
       
-      
-
+       
       }
 
     const totalquantite=paniers.reduce((accumulateur,panier)=>accumulateur+panier.quantite,0)
      const totalpaniers=paniers.reduce((accumulateur,panier)=>accumulateur+panier.prix,0)
-      
+      console.log(totalpaniers);
 
   return (
     <>
@@ -104,11 +142,13 @@ function App() {
           <div className="dessert">
             <h1>Desserts</h1>
             <div  ref={ref1} className="container">
+
+              {/* lister les produits  */}
             {PRODUITS.map((produit,index) => (
                
             <div className="card" key={index}>
                
-            <img src={produit.image} alt="" onClick={()=>handleindex(index)}/> 
+            <img src={produit.image} alt="" /> 
             <div  className="button active" onClick={()=>handlecart(produit,index)}>
               <img src={Addcart} alt="" />
              <p>Add to cart</p> </div>  
@@ -139,11 +179,11 @@ function App() {
           </div>
           <div className="panier">
               <h3>Your cart {'('+totalquantite+')'}</h3>
-              <div className="achat">
-                  <img src={Emptycart} alt="" />
+              <div ref={ref2} className="achat">
+                  <img  className='' src={Emptycart} alt="" />
                   <p>Your added items will appear here</p>
               </div>
-              
+            {/* liste des panier */}
               {paniers.map((panier) => (
           <div key={panier.id}>
             <div className='cont-panier'>
@@ -151,8 +191,8 @@ function App() {
             <h4>{panier.name}</h4>
               <div className='box-contpanier'>
                     <div className='contenue'>
-                        <p>{panier.quantite+'x'}</p>
-                        <p>{'$'+panier.prix}</p>
+                        <p className='panier-quant'>{panier.quantite+'x'}</p>
+                        <p>{'@ $'+panier.prix}</p>
                         <p>{'$'+panier.quantite*panier.prix}</p>
                     </div>
                 <button onClick={() => removeItem(panier.id)}>X</button>
@@ -168,8 +208,9 @@ function App() {
          
           </div>
         ))}
-        <div className="total">
-        <p>Somme: ${totalquantite*totalpaniers}</p>
+        <div ref={ref3} className="total ">
+        <div><p >Order total: </p><p className='numbertotal'>${totalquantite*totalpaniers}</p></div>
+        <div>This is a carbon-neutral delivery</div>
         </div>
           <button className='confirm'>Confirmer</button>
           </div>

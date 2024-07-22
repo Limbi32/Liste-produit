@@ -108,6 +108,13 @@ body{
     color:#d87213;
     font-weight: bold;
 }
+.achat.active{
+    display: block;
+}
+
+.total.active{
+    display: none;
+}
 .cont-panier{
    margin: 20px 0;
   
@@ -116,8 +123,8 @@ body{
     width: 20px;
     height: 20px;
     margin: auto 0;
-    
-    
+    border-radius: 50%;
+    cursor:pointer;
 }
 .box-contpanier{
     display: flex;
@@ -127,6 +134,25 @@ body{
     display: flex;
     gap: 10px;
 }
+.contenue p{
+    color: #8d8b8b;
+}
+.contenue .panier-quant{
+    color: #a0540d;
+    font-weight: bold;
+}
+.total{
+    display: flex;
+    flex-direction: column;
+}
+.total div{
+    display: flex;
+    justify-content: space-between;
+}
+.numbertotal{
+    font-weight: bold;
+    font-size: 26px;
+}
 .confirm{
     width: 100%;
     padding: 10px 20px;
@@ -135,5 +161,19 @@ body{
     background: #a0540d;
     color: #fff;
     border: none;
-    border-radius: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+
+@media screen and (max-width: 600px)
+{
+    .app{
+        display: flex;
+        flex-direction: column;
+        
+       
+    
+    
+    }
 }
