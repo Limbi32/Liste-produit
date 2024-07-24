@@ -9,7 +9,6 @@ import Img8 from './assets/image-brownie-desktop.jpg'
 import Img9 from './assets/image-panna-cotta-desktop.jpg'
 import Emptycart from './assets/illustration-empty-cart.svg'
 import Addcart from './assets/icon-add-to-cart.svg'
-import {Card} from './Composants/Card.jsx'
 import './App.css'
 import { useEffect, useRef, useState } from 'react'
 
@@ -37,7 +36,7 @@ function App() {
     useEffect(()=>{
       
     
-        if (paniers.length>0) {
+        if (paniers.length>=0) {
           ref2.current.classList.add('active')
           ref3.current.classList.remove('active')
           console.log(ref3.current);
@@ -60,6 +59,8 @@ function App() {
           console.log(ref3.current);
         }
     },[active])
+
+   
     //modifer le nombre de produit a ajouter au panier
       const handlerplus=(index)=>{
        
@@ -70,6 +71,7 @@ function App() {
            
           setPaniers([...paniers,modifpanier])
           // removeItem(paniers.length)
+          setPaniers(paniers.filter(panier => panier.id >= 0));
         
         
       
@@ -83,7 +85,7 @@ function App() {
             const modifpanier=paniers.splice(rang, 1,
               { id:paniers[rang].id, name:paniers[rang].name, prix:paniers[rang].prix, type:paniers[rang].type, quantite:paniers[rang].quantite-1});
             setPaniers([...paniers,modifpanier])
-            removeItem(paniers.length)
+            setPaniers(paniers.filter(panier => panier.id >= 0));
             
           }
           
@@ -126,7 +128,16 @@ function App() {
     }
       const newpanier = { id: index, name:produit.name, prix:produit.prix,type:produit.type, quantite:1};
         setPaniers([...paniers, newpanier]);
-      
+        if (paniers.length>=0) {
+          ref2.current.classList.add('active')
+          ref3.current.classList.remove('active')
+          console.log(ref3.current);
+          
+        }else{
+          ref2.current.classList.remove('active')
+          ref3.current.classList.add('active')
+          console.log(ref3.current);
+        }
        
       }
 
@@ -211,7 +222,7 @@ function App() {
         <div><p >Order total: </p><p className='numbertotal'>${totalquantite*totalpaniers}</p></div>
         <div>This is a carbon-neutral delivery</div>
         </div>
-          <button className='confirm'>Confirm order</button>
+          <button  className='confirm'>Confirm order</button>
           </div>
       </div>
     </>

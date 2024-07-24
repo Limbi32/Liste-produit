@@ -59,6 +59,7 @@ body{
     display: flex;
     justify-content: space-between;
     background: #349aac;
+    width: 120px;
     display: none;
 }
 .container .card .button.plus.active{
@@ -71,10 +72,20 @@ body{
 .container .card .button button{
     background: none;
     border: 1px solid #fff;
-    border-radius: 40%;
-    padding: 2px 3px;
+    border-radius: 50%;
+   width: 12px;
     color: #fff;
-    font-size: 16px;
+    font-size: 12px;
+    cursor: pointer;
+   
+}
+.container .card .button button:hover{
+    background: #fff;
+    border: 1px solid #fff;
+ 
+ 
+    color: #df7614;
+   
    
 }
 .container .card .button img{
